@@ -4,11 +4,11 @@ import Footer from "../features/footer/Footer";
 
 const App = () => {
     return (
-        <div className={"App"}>
+        <div className={"app"}>
             <BrowserRouter>
                 <AppRoutes/>
+                <Footer/>
             </BrowserRouter>
-            <Footer/>
         </div>
     );
 };
