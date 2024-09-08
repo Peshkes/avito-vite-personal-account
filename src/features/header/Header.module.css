@@ -1,0 +1,25 @@
+.header{
+    position: relative;
+    padding: 15px;
+}
+
+.blackBlock{position: fixed;
+    left: 25%;
+    top: 15px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    width: 50%;
+    min-width: fit-content;
+}
+
+.blackBlock ul{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blackBlock a{
+    color: white;
+    padding: 5px 15px;
+}

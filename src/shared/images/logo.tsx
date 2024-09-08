@@ -12,14 +12,6 @@ const Logo = ({ size, color }: Props) => (
         height={size}
         fill={color}
     >
-        <defs>
-            <style>
-                {`.cls-1 {
-                    fill: ${color || 'black'};
-                    stroke-width: 0px;
-                }`}
-            </style>
-        </defs>
         <g id="Layer_1-2">
             <g>
                 <path className="cls-1"
