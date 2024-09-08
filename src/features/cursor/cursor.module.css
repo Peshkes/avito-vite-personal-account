@@ -1,0 +1,12 @@
+.inversionCircle {
+    position: fixed;
+    z-index: 999;
+    border-radius: 50%;
+    pointer-events: none;
+    mix-blend-mode: difference;
+    background: white;
+    will-change: transform, height, width;
+    transition: width 0.5s, height 0.5s;
+    transition-timing-function: ease-in-out;
+    transform-origin: center center;
+}
