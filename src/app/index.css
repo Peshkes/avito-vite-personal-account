@@ -1,1 +1,12 @@
 @import "normalize.css";
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: 'Manrope', Manrope, sans-serif;
+}
+
+main{
+    flex: 1;
+}
