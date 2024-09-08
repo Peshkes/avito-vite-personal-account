@@ -1,6 +1,6 @@
 import style from './Footer.module.css';
-import Logo from "../../shared/images/logo";
-import NavList from "../../shared/ui/nav-list/NavList.tsx";
+import Logo from "../../images/logo.tsx";
+import NavList from "../../ui/nav-list/NavList.tsx";
 
 const Footer = () => {
     return (
