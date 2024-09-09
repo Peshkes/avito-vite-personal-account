@@ -16,9 +16,6 @@ import PageSizer from "./page-sizer/PageSizer.tsx";
 import style from './AllAdvertisementsPage.module.css';
 import Filter from "./filter/Filter.tsx";
 import Search from "./search/Search.tsx";
-import Button from "../../shared/ui/button/Button.tsx";
-import {localFilterSignal} from "./filter/filterSignalState.ts";
-import {defaultFilters} from "../../features/advertisements/advertisementsSlice.ts";
 
 const AllAdvertisementsPage = () => {
     const dispatch = useAppDispatch();
