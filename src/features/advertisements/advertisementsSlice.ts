@@ -1,12 +1,20 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {fetchAdvertisement, fetchAdvertisements} from "./advertisementsAsynkFunctions.tsx";
-import {AdvertisementState} from "./types.ts";
+import {AdvertisementState, Filters} from "./types.ts";
+
+export const defaultFilters: Filters = {
+    priceRange: { min: 0, max: undefined },
+    viewsRange: { min: 0, max: undefined },
+    likesRange: { min: 0, max: undefined }
+};
 
 const initialState: AdvertisementState = {
     list: [],
     current: undefined,
     page: 1,
     pageSize: 10,
+    searchQuery: '',
+    filters: defaultFilters,
     status: undefined,
     error: undefined,
 };
@@ -14,7 +22,20 @@ const initialState: AdvertisementState = {
 const advertisementsSlice = createSlice({
     name: 'advertisements',
     initialState,
-    reducers: {},
+    reducers: {
+        setPage(state, action) {
+            state.page = action.payload;
+        },
+        setPageSize(state, action) {
+            state.pageSize = action.payload;
+        },
+        setSearchQuery(state, action) {
+            state.searchQuery = action.payload;
+        },
+        setFilters(state, action) {
+            state.filters = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchAdvertisements.pending, (state) => {
@@ -42,4 +63,5 @@ const advertisementsSlice = createSlice({
     },
 });
 
+export const {setPage, setPageSize, setSearchQuery, setFilters} = advertisementsSlice.actions;
 export default advertisementsSlice.reducer;

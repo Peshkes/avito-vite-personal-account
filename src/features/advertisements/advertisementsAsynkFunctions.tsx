@@ -1,12 +1,12 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {addAdvertisement, getAdvertisement, getAdvertisements,
     putAdvertisement, removeAdvertisement} from "./advertisementsApi.ts";
-import {AdvertisementBase} from "./types.ts";
+import {AdvertisementBase, Filters} from "./types.ts";
 
 export const fetchAdvertisements = createAsyncThunk(
     'advertisements/getAdvertisements',
-    async ({page, pageSize}: { page: number; pageSize: number }) => {
-        return await getAdvertisements(page, pageSize);
+    async ({page, pageSize, searchQuery, filters}: { page: number; pageSize: number; searchQuery: string; filters: Filters }) => {
+        return await getAdvertisements(page, pageSize, searchQuery, filters);
     }
 );
 
