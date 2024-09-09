@@ -1,5 +1,5 @@
 import style from './Header.module.css';
-import Logo from "../../images/logo.tsx";
+import Logo from "../../images/Logo.tsx";
 import NavList from "../../ui/nav-list/NavList.tsx";
 
 const Header = () => {

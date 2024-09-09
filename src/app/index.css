@@ -10,4 +10,13 @@
 main{
     padding: 0 15px 0;
     flex: 1;
+    max-width: 1920px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+h1{
+    font-size: 48px;
+    font-weight: 800;
 }
