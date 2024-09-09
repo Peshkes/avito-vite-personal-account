@@ -1,0 +1,64 @@
+.filterContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.filterButton {
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 25px;
+    border: 2px solid black;
+}
+
+.filterButton.active {
+    color: #fff;
+    background-color: black;
+}
+
+.filterButton.inactive {
+    background-color: #ffffff;
+    color: black;
+}
+
+.filterDropdown {
+    position: absolute;
+    top: 42px;
+    right: 0;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 25px;
+    width: 250px;
+    z-index: 10;
+    text-align: center;
+}
+
+.filterGroup {
+    margin-bottom: 25px;
+}
+
+.filterGroup h3 {
+    font-size: 14px;
+    color: black;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.filterGroup .inputs {
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.filterGroup input {
+    width: calc(50% - 12.5px);
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.filterGroup:last-of-type {
+    margin-bottom: 0;
+}
