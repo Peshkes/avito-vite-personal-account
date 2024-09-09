@@ -1,0 +1,18 @@
+.header{
+    position: relative;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+    gap: 25px;
+    height: 100px;
+}
+
+.header h1{
+    position: absolute;
+    left: 0;
+}
+
+.container h3{
+    width: 100%;
+    text-align: center;
+}

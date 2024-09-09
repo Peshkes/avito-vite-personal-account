@@ -1,8 +1,8 @@
 import AppRoutes from "./routes/AppRoutes";
 import {BrowserRouter} from "react-router-dom";
-import Footer from "../features/footer/Footer";
-import Cursor from "../features/cursor/Cursor.tsx";
-import Header from "../features/header/Header.tsx";
+import Footer from "../shared/components/footer/Footer";
+import Cursor from "../shared/components/cursor/Cursor.tsx";
+import Header from "../shared/components/header/Header.tsx";
 
 
 const App = () => {

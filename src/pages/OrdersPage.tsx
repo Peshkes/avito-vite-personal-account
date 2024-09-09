@@ -1,8 +1,8 @@
 const OrdersPage = () => {
     return (
-        <div>
+        <main>
             <h1>Заказы</h1>
-        </div>
+        </main>
     );
 };
 
