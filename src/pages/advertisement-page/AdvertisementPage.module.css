@@ -1,0 +1,100 @@
+/* Mobile-first стиль */
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    gap: 16px;
+}
+
+.imageBlock img {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    object-fit: cover;
+}
+
+.detailsBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.description {
+    font-size: 16px;
+    color: #666;
+}
+
+.stats {
+    display: flex;
+    font-size: 14px;
+    color: #999;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.editButton,
+.ordersButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.editButton {
+    background-color: black;
+    color: white;
+}
+
+.ordersButton {
+    background-color: #474747;
+    color: white;
+}
+
+/* Планшетная и десктопная версия */
+@media (min-width: 768px) {
+    .container {
+        flex-direction: row;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px;
+        gap: 24px;
+    }
+
+    .imageBlock, .detailsBlock {
+        flex: 1;
+    }
+
+    .detailsBlock {
+        justify-content: center;
+    }
+
+    .detailsBlock {
+        display: flex;
+        flex-direction: column;
+        padding: 16px;
+    }
+
+    .title {
+        font-size: 32px;
+    }
+
+    .price {
+        font-size: 28px;
+    }
+}
