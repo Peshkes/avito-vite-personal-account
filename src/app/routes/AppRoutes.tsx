@@ -2,7 +2,7 @@ import { Routes, Route } from 'react-router-dom';
 import AllAdvertisementsPage from "../../pages/all-advertisements-page/AllAdvertisementsPage.tsx";
 import NotFoundPage from "../../pages/not-fount-page/NotFoundPage.tsx";
 import AdvertisementPage from "../../pages/advertisement-page/AdvertisementPage.tsx";
-import OrdersPage from "../../pages/OrdersPage";
+import OrdersPage from "../../pages/order-page/OrdersPage.tsx";
 
 const AppRoutes = () => {
     return (

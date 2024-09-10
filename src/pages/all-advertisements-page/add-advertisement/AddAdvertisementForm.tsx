@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAppDispatch} from "../../../app/store.ts";
 import {
     createAdvertisement,
@@ -28,6 +28,11 @@ const AddAdvertisementForm = () => {
     const pageSize = useSelector(selectAdvertisementsPageSize);
     const searchQuery = useSelector(selectAdvertisementsSearchQuery);
     const filters = useSelector(selectAdvertisementsFilters);
+    const [abortController, setAbortController] = useState<AbortController | null>(null);
+
+    useEffect(() => {
+        return () => {if (abortController) abortController.abort()};
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
@@ -38,10 +43,13 @@ const AddAdvertisementForm = () => {
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        const controller = new AbortController();
+        setAbortController(controller);
+        const {signal} = controller;
         e.preventDefault();
         dispatch(createAdvertisement(formData));
         setFormData(defaultState);
-        dispatch(fetchAdvertisements({page, pageSize, searchQuery, filters}));
+        dispatch(fetchAdvertisements({page, pageSize, searchQuery, filters, signal}));
     };
 
     return (

@@ -2,11 +2,12 @@ import {AdvertisementBase, Filters} from "./types.ts";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+/* eslint-disable @typescript-eslint/no-explicit-any */ //Чтобы сделать универсальную функцию
 const request = async (
     endpoint: string,
     method: string = 'GET',
-    data?: unknown,
-    signal?: AbortSignal
+    data?: any,
+    signal?: AbortSignal,
 ) => {
     try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
@@ -32,7 +33,7 @@ export const getAdvertisements = async (
     pageSize: number,
     searchQuery: string,
     filters: Filters,
-    signal?: AbortSignal
+    signal: AbortSignal
 ) => {
     const start = (page - 1) * pageSize;
     const filterParams = new URLSearchParams();
@@ -50,18 +51,18 @@ export const getAdvertisements = async (
     return request(`advertisements?${filterParams.toString()}`, 'GET', undefined, signal);
 };
 
-export const getAdvertisement = async (id: string, signal?: AbortSignal) => {
-    return request(`advertisements/${id}`, 'GET', undefined, signal);
+export const getAdvertisement = async (id: string, signal: AbortSignal) => {
+    return request(`advertisements/${id}`, 'GET',undefined, signal);
 };
 
-export const addAdvertisement = async (data: AdvertisementBase, signal?: AbortSignal) => {
-    return request('advertisements', 'POST', data, signal);
+export const addAdvertisement = async (data: AdvertisementBase) => {
+    return request('advertisements', 'POST', data);
 };
 
-export const putAdvertisement = async (id: string, data: AdvertisementBase, signal?: AbortSignal) => {
-    return request(`advertisements/${id}`, 'PUT', data, signal);
+export const putAdvertisement = async (id: string, data: AdvertisementBase) => {
+    return request(`advertisements/${id}`, 'PUT', data);
 };
 
-export const removeAdvertisement = async (id: string, signal?: AbortSignal) => {
-    return request(`advertisements/${id}`, 'DELETE', undefined, signal);
+export const removeAdvertisement = async (id: string) => {
+    return request(`advertisements/${id}`, 'DELETE');
 };
