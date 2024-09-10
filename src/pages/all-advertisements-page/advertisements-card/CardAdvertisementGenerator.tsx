@@ -8,7 +8,7 @@ import {
 import Button from '../../../shared/ui/button/Button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../app/store.ts';
-import { fetchAdvertisements } from '../../../features/advertisements/advertisementsAsynkFunctions.tsx';
+import { fetchAdvertisements } from '../../../features/advertisements/advertisementsAsyncFunctions.ts';
 import Loader from "../../../shared/components/loader/Loader.tsx";
 
 const CardAdvertisementGenerator: React.FC = () => {

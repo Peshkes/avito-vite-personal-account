@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {useSelector} from "react-redux";
 import {useAppDispatch} from "../../app/store.ts";
 import {selectAdvertisement} from "../../features/advertisements/advertisementsSelectors.ts";
-import {deleteAdvertisement, fetchAdvertisement, updateAdvertisement} from "../../features/advertisements/advertisementsAsynkFunctions.tsx";
+import {deleteAdvertisement, fetchAdvertisement, updateAdvertisement} from "../../features/advertisements/advertisementsAsyncFunctions.ts";
 import TextInput from "../../shared/ui/text-input/TextInput.tsx";
 import Form from "../../shared/ui/form/Form.tsx";
 import Textarea from "../../shared/ui/textarea/Textarea.tsx";

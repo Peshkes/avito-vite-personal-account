@@ -3,7 +3,7 @@ import {useAppDispatch} from "../../../app/store.ts";
 import {
     createAdvertisement,
     fetchAdvertisements
-} from "../../../features/advertisements/advertisementsAsynkFunctions.tsx";
+} from "../../../features/advertisements/advertisementsAsyncFunctions.ts";
 import {useSelector} from "react-redux";
 import {
     selectAdvertisementsFilters, selectAdvertisementsPageNumber, selectAdvertisementsPageSize,

@@ -1,5 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {fetchAdvertisement, fetchAdvertisements} from "./advertisementsAsynkFunctions.tsx";
+import {fetchAdvertisement, fetchAdvertisements} from "./advertisementsAsyncFunctions.ts";
 import {AdvertisementState, Filters} from "./types.ts";
 
 export const defaultFilters: Filters = {

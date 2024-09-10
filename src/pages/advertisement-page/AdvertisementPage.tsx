@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAdvertisement } from '../../features/advertisements/advertisementsSelectors.ts';
 import { useParams } from 'react-router-dom';
-import { fetchAdvertisement } from '../../features/advertisements/advertisementsAsynkFunctions.tsx';
+import { fetchAdvertisement } from '../../features/advertisements/advertisementsAsyncFunctions.ts';
 import { useAppDispatch } from '../../app/store.ts';
 import style from './AdvertisementPage.module.css';
 import useModal from '../../shared/components/modal-window/useModal.tsx';

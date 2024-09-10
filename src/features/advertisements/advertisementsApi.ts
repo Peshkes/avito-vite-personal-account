@@ -1,32 +1,5 @@
 import {AdvertisementBase, Filters} from "./types.ts";
-
-const BASE_URL = import.meta.env.VITE_API_URL;
-
-/* eslint-disable @typescript-eslint/no-explicit-any */ //Чтобы сделать универсальную функцию
-const request = async (
-    endpoint: string,
-    method: string = 'GET',
-    data?: any,
-    signal?: AbortSignal,
-) => {
-    try {
-        const response = await fetch(`${BASE_URL}/${endpoint}`, {
-            method,
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: data ? JSON.stringify(data) : undefined,
-            signal,
-        });
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return await response.json();
-    } catch (error) {
-        console.error(`Error ${method} ${endpoint}:`, error);
-        throw error;
-    }
-};
+import {sendRequest} from "../../shared/templates.ts";
 
 export const getAdvertisements = async (
     page: number,
@@ -48,21 +21,21 @@ export const getAdvertisements = async (
     if (filters.likesRange.min !== 0) filterParams.append('likes_gte', filters.likesRange.min.toString());
     if (filters.likesRange.max !== undefined) filterParams.append('likes_lte', filters.likesRange.max.toString());
 
-    return request(`advertisements?${filterParams.toString()}`, 'GET', undefined, signal);
+    return sendRequest(`advertisements?${filterParams.toString()}`, 'GET', undefined, signal);
 };
 
 export const getAdvertisement = async (id: string, signal: AbortSignal) => {
-    return request(`advertisements/${id}`, 'GET',undefined, signal);
+    return sendRequest(`advertisements/${id}`, 'GET',undefined, signal);
 };
 
 export const addAdvertisement = async (data: AdvertisementBase) => {
-    return request('advertisements', 'POST', data);
+    return sendRequest('advertisements', 'POST', data);
 };
 
 export const putAdvertisement = async (id: string, data: AdvertisementBase) => {
-    return request(`advertisements/${id}`, 'PUT', data);
+    return sendRequest(`advertisements/${id}`, 'PUT', data);
 };
 
 export const removeAdvertisement = async (id: string) => {
-    return request(`advertisements/${id}`, 'DELETE');
+    return sendRequest(`advertisements/${id}`, 'DELETE');
 };
