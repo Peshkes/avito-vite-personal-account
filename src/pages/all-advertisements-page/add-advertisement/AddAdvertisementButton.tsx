@@ -1,0 +1,15 @@
+import useModal from "../../../shared/components/modal-window/useModal.tsx";
+import AddAdvertisementForm from "./add-advertisement-form/AddAdvertisementForm.tsx";
+import style from './AddAdvertisementButton.module.css';
+
+const AddAdvertisementButton = () => {
+    const {handleOpenModal, ModalComponent} = useModal(<AddAdvertisementForm/>);
+    return (
+        <div>
+            <button className={style.addButton} onClick={() => handleOpenModal()}>+</button>
+            {ModalComponent}
+        </div>
+    );
+};
+
+export default AddAdvertisementButton;
