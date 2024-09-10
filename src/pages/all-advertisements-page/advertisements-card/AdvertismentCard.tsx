@@ -2,8 +2,10 @@ import React from 'react';
 import style from './AdvertisementCard.module.css';
 import Eye from "../../../shared/images/Eye.tsx";
 import Heart from "../../../shared/images/Heart.tsx";
+import {useNavigate} from "react-router-dom";
 
 type AdvertisementCardProps = {
+    id: string;
     imageUrl: string;
     name: string;
     price: number;
@@ -11,9 +13,10 @@ type AdvertisementCardProps = {
     likes: number;
 };
 
-const AdvertisementCard: React.FC<AdvertisementCardProps> = ({ imageUrl, name, price, views, likes }) => {
+const AdvertisementCard: React.FC<AdvertisementCardProps> = ({id, imageUrl, name, price, views, likes}) => {
+    const navigate = useNavigate();
     return (
-        <div className={style.card}>
+        <div className={style.card + ' ' + 'clickable'} onClick={()=>navigate(`/advertisement/${id}`)}>
             <div className={style.imageBlock}>
                 <img src={imageUrl} alt={name} className={style.image}/>
             </div>
@@ -22,10 +25,10 @@ const AdvertisementCard: React.FC<AdvertisementCardProps> = ({ imageUrl, name, p
                 <p className={style.price}>Стоимость: {price} ₽</p>
                 <div className={style.stats}>
                     <div className={style.icon}>
-                        <Eye size={25} color={"#7e7e7e"}/> <p>{views}</p>
+                        <Eye size={25} color={"#7e7e7e"}/> <p>{views || 0}</p>
                     </div>
                     <div className={style.icon}>
-                        <Heart size={25} color={"#7e7e7e"}/> <p>{likes}</p>
+                        <Heart size={25} color={"#7e7e7e"}/> <p>{likes || 0}</p>
                     </div>
                 </div>
             </div>

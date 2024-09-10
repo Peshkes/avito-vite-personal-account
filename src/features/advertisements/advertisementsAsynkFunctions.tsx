@@ -13,6 +13,7 @@ export const fetchAdvertisements = createAsyncThunk(
 export const fetchAdvertisement = createAsyncThunk(
     'advertisements/getAdvertisement',
     async (id: string) => {
+        console.log(id);
         return await getAdvertisement(id);
     }
 );
@@ -26,8 +27,8 @@ export const createAdvertisement = createAsyncThunk(
 
 export const updateAdvertisement = createAsyncThunk(
     'advertisements/updateAdvertisement',
-    async ({id, advertisment}: { id: string; advertisment: AdvertisementBase }) => {
-        return await putAdvertisement(id, advertisment);
+    async ({id, advertisement}: { id: string; advertisement: AdvertisementBase }) => {
+        return await putAdvertisement(id, advertisement);
     }
 );
 

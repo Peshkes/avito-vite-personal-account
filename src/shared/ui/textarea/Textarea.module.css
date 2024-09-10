@@ -1,0 +1,19 @@
+.textarea {
+    border: 2px solid black;
+    border-radius: 4px;
+    padding: 8px;
+    font-size: 1rem;
+    resize: vertical;
+    height: 100px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 1rem;
+}

@@ -2,19 +2,19 @@ import React, {useState} from 'react';
 import ModalWindow from './ModalWindow.tsx';
 import WrapperModal from "../wrapper-modal/WrapperModal.tsx";
 
-const useModal = (body: React.ReactNode) => {
-    const [modalWindow, setModalWindow] = useState<React.ReactNode | null>(null);
+const useModal = (externalBody: React.ReactNode) => {
+    const [body, setBody] = useState<React.ReactNode | null>(null);
 
-    const closeModal = () => setModalWindow(null);
+    const closeModal = () => setBody(null);
 
     const handleOpenModal = () => {
-        setModalWindow(body);
+        setBody(externalBody);
     };
 
-    const ModalComponent  = modalWindow ? (
+    const ModalComponent  = body ? (
         <WrapperModal closeFunction={closeModal}>
             <ModalWindow>
-                {modalWindow}
+                {body}
             </ModalWindow>
         </WrapperModal>
     ) : null;
