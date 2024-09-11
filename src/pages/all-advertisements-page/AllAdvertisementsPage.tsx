@@ -1,31 +1,23 @@
-import Pagination from "./pagination/Pagination.tsx";
+import CardAdvertisementGenerator from "./advertisements-card/CardAdvertisementGenerator.tsx";
 import Gallery from "../../shared/components/gallery/Gallery.tsx";
 import PageSizer from "./page-sizer/PageSizer.tsx";
-import style from './AllAdvertisementsPage.module.css';
 import Filter from "./filter/Filter.tsx";
 import Search from "./search/Search.tsx";
 import AddAdvertisementButton from "./add-advertisement/AddAdvertisementButton.tsx";
-import CardAdvertisementGenerator from "./advertisements-card/CardAdvertisementGenerator.tsx";
+import PageLayout from "../../shared/components/page-layout/PageLayout.tsx";
+import AllAdvertisementsPagination from "./AllAdvertisementsPagination.tsx";
 
 const AllAdvertisementsPage = () => {
     return (
-        <main className={style.container}>
-            <div className={style.header}>
-                <div className={style.main}>
-                    <h1>Все объявления</h1>
-                    <AddAdvertisementButton/>
-                </div>
-                <div className={style.settings}>
-                    <PageSizer/>
-                    <Search/>
-                    <Filter/>
-                </div>
-            </div>
+        <PageLayout
+            title="Все объявления"
+            mainContent={<AddAdvertisementButton/>}
+            settingsContent={<><PageSizer/><Search/><Filter/></>}>
             <Gallery>
-                    <CardAdvertisementGenerator/>
+                <CardAdvertisementGenerator/>
             </Gallery>
-            <Pagination/>
-        </main>
+            <AllAdvertisementsPagination/>
+        </PageLayout>
     );
 };
 
