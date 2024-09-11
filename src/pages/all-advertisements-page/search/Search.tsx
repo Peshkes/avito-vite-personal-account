@@ -47,7 +47,7 @@ const Search = () => {
                 dispatch(setSearchQuery(queryFromUrl));
             }
         }
-    }, [location.search, dispatch, searchQuery, inputValue]);
+    }, [location.search, dispatch, searchQuery]);
 
     return (
         <div className={style.container} onMouseLeave={() => setIsOpen(false)}>
