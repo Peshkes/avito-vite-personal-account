@@ -40,6 +40,7 @@ const advertisementsSlice = createSlice({
         builder
             .addCase(fetchAdvertisements.pending, (state) => {
                 state.status = 'loading';
+                state.error = undefined;
             })
             .addCase(fetchAdvertisements.fulfilled, (state, action) => {
                 state.status = 'succeeded';

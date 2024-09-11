@@ -29,7 +29,6 @@ const Search = () => {
             }
             navigate(`?${searchParams.toString()}`);
 
-            // Отправляем действие только если новое значение отличается от текущего
             if (query !== searchQuery) {
                 dispatch(setSearchQuery(query));
             }
@@ -42,7 +41,6 @@ const Search = () => {
         const searchParams = new URLSearchParams(location.search);
         const queryFromUrl = searchParams.get('search') || '';
 
-        // Обновляем состояние только если новое значение отличается от текущего
         if (queryFromUrl !== inputValue) {
             setInputValue(queryFromUrl);
             if (queryFromUrl !== searchQuery) {

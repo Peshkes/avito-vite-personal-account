@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectAdvertisement } from '../../features/advertisements/advertisementsSelectors.ts';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import { fetchAdvertisement } from '../../features/advertisements/advertisementsAsyncFunctions.ts';
 import { useAppDispatch } from '../../app/store.ts';
 import style from './AdvertisementPage.module.css';
@@ -14,7 +14,8 @@ const AdvertisementPage: React.FC = () => {
     const advertisement = useSelector(selectAdvertisement);
     const { id } = useParams();
     const { handleOpenModal, ModalComponent } = useModal(<UpdateAdvertisementForm id={id as string} />);
-    const [loading, setLoading] = useState(true); // Добавляем состояние загрузки
+    const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -51,7 +52,7 @@ const AdvertisementPage: React.FC = () => {
                         </div>
                         <div className={style.buttons}>
                             <button className={style.editButton} onClick={handleOpenModal}>Редактировать</button>
-                            <button className={style.ordersButton}>Заказы</button>
+                            <button className={style.ordersButton} onClick={()=>navigate(`/orders/${advertisement?.id}`)}>Заказы</button>
                         </div>
                     </div>
                     {ModalComponent}
