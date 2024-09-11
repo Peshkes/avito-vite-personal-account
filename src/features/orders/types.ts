@@ -10,6 +10,13 @@ export const OrderStatus = {
     Refund: 6
 } as const;
 
+export type OrderStatusValue = typeof OrderStatus[keyof typeof OrderStatus];
+
+export const getStatusText = (status: OrderStatusValue): string => {
+    const statusText = Object.keys(OrderStatus).find(key => OrderStatus[key as keyof typeof OrderStatus] === status);
+    return statusText ? statusText : 'Unknown Status';
+};
+
 
 export type OrderItem = Advertisement & { count: number; };
 
@@ -30,6 +37,7 @@ export type Image = {
 }
 
 export type SortType = {
+    id: number;
     name: string;
     field: keyof Order;
     direction: 'asc' | 'desc';
@@ -38,6 +46,6 @@ export type SortType = {
 export type Sorting = Array<SortType>;
 
 export const SortingData: Sorting = [
-    {name: 'Цена по возрастанию', field: 'total', direction: 'desc'},
-    {name: 'Цена по убыванию', field: 'total', direction: 'asc'},
+    {id: 1, name: 'Цена по возрастанию', field: 'total', direction: 'desc'},
+    {id: 2, name: 'Цена по убыванию', field: 'total', direction: 'asc'},
 ] as const;

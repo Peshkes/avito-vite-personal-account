@@ -1,45 +1,55 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Order, SortType } from "./types";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {Order, OrderStatusValue, SortType} from "./types";
 import {fetchOrders} from "./ordersAsyncFuncions.ts";
+import {Status} from "../advertisements/types.ts";
 
 export type OrdersState = {
     orders: Order[];
-    sort: SortType | null;
-    loading: boolean;
-    error: string | null;
+    page: number;
+    pageSize: number;
+    sort: SortType | undefined;
+    statusFilter: OrderStatusValue | undefined;
+    status: Status;
+    error: string | undefined;
 }
 
 const initialState: OrdersState = {
     orders: [],
-    sort: null,
-    loading: false,
-    error: null,
+    page: 1,
+    pageSize: 10,
+    sort: undefined,
+    statusFilter: undefined,
+    status: undefined,
+    error: undefined,
 };
 
 const ordersSlice = createSlice({
     name: 'orders',
     initialState,
     reducers: {
-        setSort(state, action: PayloadAction<SortType | null>) {
+        setSort(state, action: PayloadAction<SortType | undefined>) {
             state.sort = action.payload;
         },
+        setFilters(state, action: PayloadAction<OrderStatusValue | undefined>) {
+            state.statusFilter = action.payload;
+        }
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchOrders.pending, (state) => {
-                state.loading = true;
-                state.error = null;
+                state.status = 'loading';
+                state.error = undefined;
             })
             .addCase(fetchOrders.fulfilled, (state, action: PayloadAction<Order[]>) => {
-                state.loading = false;
+                state.status = 'succeeded';
                 state.orders = action.payload;
             })
             .addCase(fetchOrders.rejected, (state, action) => {
-                state.loading = false;
+                state.status = 'failed';
                 state.error = action.error.message || 'Error fetching orders';
             });
     },
 });
 
-export const { setSort } = ordersSlice.actions;
+export const { setSort, setFilters } = ordersSlice.actions;
 export default ordersSlice.reducer;

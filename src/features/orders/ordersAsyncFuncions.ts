@@ -1,17 +1,18 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
-import {getOrders, getOrder} from "./ordersApi.ts";
-import {SortType} from "./types.ts";
+import {getOrder, getOrders} from "./ordersApi.ts";
+import {OrderStatusValue, SortType} from "./types.ts";
 
 export const fetchOrders = createAsyncThunk(
     'orders/getOrders',
-    async ({page, pageSize, signal, sort}: {
-        page: number;
-        pageSize: number;
-        signal: AbortSignal;
-        sort?: SortType;
+    async ({page, pageSize, signal, status, sort}: {
+        page: number,
+        pageSize: number,
+        signal: AbortSignal,
+        status?: OrderStatusValue,
+        sort?: SortType,
     }, {rejectWithValue}) => {
         try {
-            return await getOrders(page, pageSize, signal, sort);
+            return await getOrders(page, pageSize, signal, status, sort);
         } catch (error) {
             if (error instanceof Error) {
                 if (error.name === 'AbortError') {

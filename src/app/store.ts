@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import advertisements from '../features/advertisements/advertisementsSlice.ts';
+import orders from '../features/orders/ordersSlice.ts';
 
 export const store = configureStore({
     reducer: {
         advertisements,
+        orders
     },
 });
 

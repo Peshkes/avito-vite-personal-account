@@ -1,10 +1,11 @@
-import {SortType} from "./types.ts";
+import {OrderStatusValue, SortType} from "./types.ts";
 import {sendRequest} from "../../shared/templates.ts";
 
 export const getOrders = async (
     page: number,
     pageSize: number,
     signal: AbortSignal,
+    status?: OrderStatusValue,
     sort?: SortType
 ) => {
     const start = (page - 1) * pageSize;
@@ -17,6 +18,8 @@ export const getOrders = async (
         filterParams.append('_order', sort.direction);
     }
 
+    if (status) filterParams.append('status', status.toString());
+    console.log(`orders?${filterParams.toString()}`);
     return sendRequest(`orders?${filterParams.toString()}`, 'GET', undefined, signal);
 };
 
