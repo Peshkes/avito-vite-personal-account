@@ -8,6 +8,7 @@ import style from './AdvertisementPage.module.css';
 import useModal from '../../shared/components/modal-window/useModal.tsx';
 import UpdateAdvertisementForm from './UpdateAdvertisementForm.tsx';
 import Loader from "../../shared/components/loader/Loader.tsx";
+import {getRandomImageURL} from "../../shared/templates.ts";
 
 const AdvertisementPage: React.FC = () => {
     const dispatch = useAppDispatch();
@@ -40,7 +41,7 @@ const AdvertisementPage: React.FC = () => {
             ) : (
                 <main className={style.container}>
                     <div className={style.imageBlock}>
-                        <img src={advertisement?.imageUrl} alt={advertisement?.name} />
+                        <img src={advertisement?.imageUrl || getRandomImageURL()} alt={advertisement?.name} />
                     </div>
                     <div className={style.detailsBlock}>
                         <h1 className={style.title}>{advertisement?.name}</h1>

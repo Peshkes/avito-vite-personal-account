@@ -6,7 +6,7 @@ const AddAdvertisementButton = () => {
     const {handleOpenModal, ModalComponent} = useModal(<AddAdvertisementForm/>);
     return (
         <div>
-            <button className={style.addButton} onClick={() => handleOpenModal()}>+</button>
+            <button className={style.addButton} onClick={() => handleOpenModal()}>Добавить</button>
             {ModalComponent}
         </div>
     );

@@ -1,74 +1,50 @@
-.filterContainer {
-    position: relative;
-    display: inline-block;
-}
-
-.filterButton {
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-bottom: 25px;
-    border: 2px solid black;
-}
-
-.filterButton.active {
-    color: #fff;
-    background-color: black;
-}
-
-.filterButton.inactive {
-    background-color: #ffffff;
-    color: black;
-}
-
-.filterDropdown {
-    position: absolute;
-    top: 42px;
-    right: 0;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 4px;
-    padding: 25px;
-    width: 250px;
-    z-index: 10;
-    text-align: center;
-}
-
-.filterGroup {
-    margin-bottom: 25px;
-}
-
-.filterGroup h3 {
-    font-size: 14px;
-    color: black;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.filterGroup .inputs {
-    display: flex;
-    justify-content: space-between;
-    gap: 25px;
-}
-
-.filterGroup input {
-    width: calc(50% - 12.5px);
-    padding: 5px;
-    border: 2px solid black;
-    border-radius: 4px;
-}
-
-.filterGroup:last-of-type {
-    margin-bottom: 0;
-}
-
 .filterOptions {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
 
-.filterOptions input {
-    margin-right: 5px;
+.filterOptions label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #555;
+    position: relative;
+    padding-left: 28px;
+}
+
+.filterOptions input[type="radio"] {
+    display: none;
+}
+
+.filterOptions label::before {
+    content: '';
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #888;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.filterOptions input[type="radio"]:checked + label::before {
+    background-color: black;
+    border-color: black
+}
+
+.filterOptions input[type="radio"]:checked + label::after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: white;
+    position: absolute;
+    left: 3px;
+    top: 50%;
+    transform: translateY(-50%);
 }

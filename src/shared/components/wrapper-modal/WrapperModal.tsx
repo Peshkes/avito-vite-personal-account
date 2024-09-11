@@ -20,7 +20,7 @@ const WrapperModal = ({ children, closeFunction }: Props) => {
     }, [closeFunction]);
 
     return (
-        <div className={style.overlay}>
+        <div className={style.overlay} onClick={closeFunction}>
             <button
                 onClick={closeFunction}
                 className={style.closeButton}

@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { setFilters } from '../../../features/advertisements/advertisementsSlice.ts';
-import { Filters } from '../../../features/advertisements/types.ts';
+import {useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {setFilters} from '../../../features/advertisements/advertisementsSlice.ts';
+import {Filters} from '../../../features/advertisements/types.ts';
 import style from './Filter.module.css';
 import Button from "../../../shared/ui/button/Button.tsx";
 import DropdownButton from "../../../shared/components/dropdown-button/DropdownButton.tsx";
@@ -35,10 +35,10 @@ const Filter = () => {
 
     useEffect(() => {
         const newFilters = parseFiltersFromSearchParams(searchParams);
-        setFiltersState(newFilters);
         if (JSON.stringify(newFilters) !== JSON.stringify(filters)) {
-            dispatch(setFilters(newFilters));
+            setFiltersState(newFilters);
         }
+        dispatch(setFilters(newFilters));
     }, [location.search]);
 
     const handleFilterChange =
@@ -61,7 +61,7 @@ const Filter = () => {
             alert('Минимальные значения не могут быть больше максимальных!');
             return;
         }
-
+        const oldSearchParams = new URLSearchParams(location.search);
         const searchParams = new URLSearchParams(location.search);
 
         Object.entries(filters).forEach(([key, range]) => {
@@ -78,7 +78,9 @@ const Filter = () => {
             }
         });
 
-        navigate(`?${searchParams.toString()}`);
+        if (searchParams && oldSearchParams && searchParams.toString() !== oldSearchParams.toString()) {
+            navigate(`?${searchParams.toString()}`);
+        }
     };
 
     const activeFiltersCount = Object.values(filters).reduce(
@@ -93,18 +95,30 @@ const Filter = () => {
                 <div className={style.inputs}>
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Минимум"
                         value={filters.priceRange.min || ''}
                         min={0}
                         max={filters.priceRange.max}
                         onChange={(e) => handleFilterChange('priceRange', 'min', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Максимум"
                         value={filters.priceRange.max || ''}
                         min={filters.priceRange.min || 0}
                         onChange={(e) => handleFilterChange('priceRange', 'max', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                 </div>
             </div>
@@ -113,18 +127,30 @@ const Filter = () => {
                 <div className={style.inputs}>
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Минимум"
                         value={filters.viewsRange.min || ''}
                         min={0}
                         max={filters.viewsRange.max}
                         onChange={(e) => handleFilterChange('viewsRange', 'min', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Максимум"
                         value={filters.viewsRange.max || ''}
                         min={filters.viewsRange.min || 0}
                         onChange={(e) => handleFilterChange('viewsRange', 'max', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                 </div>
             </div>
@@ -133,18 +159,30 @@ const Filter = () => {
                 <div className={style.inputs}>
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Минимум"
                         value={filters.likesRange.min || ''}
                         min={0}
                         max={filters.likesRange.max}
                         onChange={(e) => handleFilterChange('likesRange', 'min', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                     <input
                         type="number"
+                        inputMode={"numeric"}
                         placeholder="Максимум"
                         value={filters.likesRange.max || ''}
                         min={filters.likesRange.min || 0}
                         onChange={(e) => handleFilterChange('likesRange', 'max', Number(e.target.value))}
+                        onKeyDown={(e) => {
+                            if (e.key === 'e' || e.key === 'E' || e.key === '+' || e.key === '-') {
+                                e.preventDefault();
+                            }
+                        }}
                     />
                 </div>
             </div>

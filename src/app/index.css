@@ -5,6 +5,7 @@
     flex-direction: column;
     min-height: 100vh;
     font-family: 'Manrope', Manrope, sans-serif;
+    background-color: white;
 }
 
 main{

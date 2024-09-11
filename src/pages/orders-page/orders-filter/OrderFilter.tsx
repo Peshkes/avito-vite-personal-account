@@ -6,6 +6,7 @@ import style from './OrderFilter.module.css';
 import Button from "../../../shared/ui/button/Button.tsx";
 import { setFilters } from '../../../features/orders/ordersSlice.ts';
 import { selectOrdersFilters } from "../../../features/orders/ordersSelectors.ts";
+import DropdownButton from "../../../shared/components/dropdown-button/DropdownButton.tsx";
 
 const parseOrderFiltersFromSearchParams = (searchParams: URLSearchParams): OrderStatusValue | undefined => {
     return searchParams.get('orderStatuses')
@@ -15,7 +16,6 @@ const parseOrderFiltersFromSearchParams = (searchParams: URLSearchParams): Order
 
 const OrderFilter = () => {
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
@@ -39,20 +39,19 @@ const OrderFilter = () => {
         navigate(`?${searchParams.toString()}`);
     };
 
+    const resetFilters = () => {
+        setFiltersState(undefined);
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.delete('orderStatuses');
+        navigate(`?${searchParams.toString()}`);
+    };
+
     const activeFilter = filters || null;
 
-    const buttonStyle = activeFilter !== null ? style.active : style.inactive;
-
     return (
-        <div className={style.filterContainer} onMouseLeave={() => setIsOpen(false)}>
-            <button
-                className={`${style.filterButton} ${buttonStyle}`}
-                onClick={() => setIsOpen(!isOpen)}
-                onMouseEnter={() => setIsOpen(true)}
-            >
-                {activeFilter !== null ? `Фильтр (${Object.keys(OrderStatus).find(key => OrderStatus[key as keyof typeof OrderStatus] === activeFilter)})` : 'Фильтр'}
-            </button>
-            {isOpen && (
+        <DropdownButton
+            buttonText={activeFilter !== null ? `Фильтр (${Object.keys(OrderStatus).find(key => OrderStatus[key as keyof typeof OrderStatus] === activeFilter)})` : 'Фильтр'}
+            dropdownContent={
                 <div className={style.filterDropdown}>
                     <h3>Статус заказа</h3>
                     <div className={style.filterOptions}>
@@ -73,13 +72,14 @@ const OrderFilter = () => {
                     </div>
                     <Button
                         withArrow={false}
-                        onClick={() => navigate('/orders/')}
+                        onClick={resetFilters}
                     >
                         Сбросить
                     </Button>
                 </div>
-            )}
-        </div>
+            }
+            active={activeFilter !== null}
+        />
     );
 };
 

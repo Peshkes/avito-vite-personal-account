@@ -3,6 +3,7 @@ import style from './AdvertisementCard.module.css';
 import Eye from "../../../shared/images/Eye.tsx";
 import Heart from "../../../shared/images/Heart.tsx";
 import {useNavigate} from "react-router-dom";
+import {getRandomImageURL} from "../../../shared/templates.ts";
 
 type AdvertisementCardProps = {
     id: string;
@@ -18,7 +19,7 @@ const AdvertisementCard: React.FC<AdvertisementCardProps> = ({id, imageUrl, name
     return (
         <div className={style.card + ' ' + 'clickable'} onClick={()=>navigate(`/advertisement/${id}`)}>
             <div className={style.imageBlock}>
-                <img src={imageUrl} alt={name} className={style.image}/>
+                <img src={imageUrl || getRandomImageURL()} alt={name} className={style.image}/>
             </div>
             <div className={style.content}>
                 <h2 className={style.title}>{name}</h2>

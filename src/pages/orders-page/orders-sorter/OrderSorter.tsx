@@ -6,6 +6,7 @@ import style from './OrderSorter.module.css';
 import { setSort } from '../../../features/orders/ordersSlice.ts';
 import { selectOrdersSort } from "../../../features/orders/ordersSelectors.ts";
 import Button from "../../../shared/ui/button/Button.tsx";
+import DropdownButton from "../../../shared/components/dropdown-button/DropdownButton.tsx";
 
 const parseSortFromSearchParams = (searchParams: URLSearchParams): SortType | undefined => {
     const sortId = searchParams.get('sort');
@@ -15,9 +16,8 @@ const parseSortFromSearchParams = (searchParams: URLSearchParams): SortType | un
     return undefined;
 };
 
-const OrderFilter = () => {
+const OrderSorter = () => {
     const dispatch = useDispatch();
-    const [isOpen, setIsOpen] = useState(false);
     const location = useLocation();
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(location.search);
@@ -45,22 +45,21 @@ const OrderFilter = () => {
         }
     };
 
+    const resetSort = () => {
+        setSortState(undefined);
+        const searchParams = new URLSearchParams(location.search);
+        searchParams.delete('sort');
+        navigate(`?${searchParams.toString()}`);
+    };
+
     const activeSort = sort || null;
 
-    const buttonStyle = activeSort !== null ? style.active : style.inactive;
-
     return (
-        <div className={style.filterContainer} onMouseLeave={() => setIsOpen(false)}>
-            <button
-                className={`${style.filterButton} ${buttonStyle}`}
-                onClick={() => setIsOpen(!isOpen)}
-                onMouseEnter={() => setIsOpen(true)}
-            >
-                {activeSort
-                    ? `Сортировка (${SortingData.find(item => item.id === activeSort.id)?.name})`
-                    : 'Сортировка'}
-            </button>
-            {isOpen && (
+        <DropdownButton
+            buttonText={activeSort
+                ? `Сортировка (${SortingData.find(item => item.id === activeSort.id)?.name})`
+                : 'Сортировка'}
+            dropdownContent={
                 <div className={style.filterDropdown}>
                     <h3>Сортировка</h3>
                     <div className={style.filterOptions}>
@@ -78,14 +77,15 @@ const OrderFilter = () => {
                     </div>
                     <Button
                         withArrow={false}
-                        onClick={() => navigate('/orders/')}
+                        onClick={resetSort}
                     >
                         Сбросить
                     </Button>
                 </div>
-            )}
-        </div>
+            }
+            active={activeSort !== null}
+        />
     );
 };
 
-export default OrderFilter;
+export default OrderSorter;

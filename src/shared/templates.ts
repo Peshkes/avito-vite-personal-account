@@ -22,3 +22,7 @@ export const sendRequest = async (
         throw error;
     }
 };
+
+export const getRandomImageURL = () => {
+    return `https://picsum.photos/800/600?random=${Math.random()}`;
+}

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { selectAdvertisementsSearchQuery } from "../../../features/advertisements/advertisementsSelectors.ts";
 import style from "./Search.module.css";
 import { setSearchQuery } from "../../../features/advertisements/advertisementsSlice.ts";
+import DropdownButton from "../../../shared/components/dropdown-button/DropdownButton.tsx";
 
 const Search = () => {
     const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
@@ -11,9 +12,7 @@ const Search = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const searchQuery = useSelector(selectAdvertisementsSearchQuery);
-    const [isOpen, setIsOpen] = useState(false);
     const [inputValue, setInputValue] = useState<string>(searchQuery);
-    const buttonStyle = searchQuery.length > 0 ? style.active : style.inactive;
 
     const handleSearchChange = useCallback((query: string) => {
         setInputValue(query);
@@ -50,25 +49,19 @@ const Search = () => {
     }, [location.search, dispatch, searchQuery]);
 
     return (
-        <div className={style.container} onMouseLeave={() => setIsOpen(false)}>
-            <button
-                className={`${style.button} ${buttonStyle}`}
-                onClick={() => setIsOpen(!isOpen)}
-                onMouseEnter={() => setIsOpen(true)}
-            >
-                Поиск
-            </button>
-            {isOpen && (
-                <div className={style.dropdown}>
-                    <input
-                        type="search"
-                        placeholder="Поиск"
-                        value={inputValue}
-                        onChange={(e) => handleSearchChange(e.target.value)}
-                    />
-                </div>
-            )}
-        </div>
+        <DropdownButton
+            buttonText="Поиск"
+            dropdownContent={
+                <input
+                    type="search"
+                    placeholder="Поиск"
+                    value={inputValue}
+                    onChange={(e) => handleSearchChange(e.target.value)}
+                    className={style.searchInput}
+                />
+            }
+            active={searchQuery.length > 0}
+        />
     );
 };
 

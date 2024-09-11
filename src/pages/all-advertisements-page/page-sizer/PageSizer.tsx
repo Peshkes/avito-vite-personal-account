@@ -18,7 +18,7 @@ const PageSizer = () => {
     }, [dispatch, timeoutId]);
     return (
         <div className={style.sizer}>
-            <p>Количество объявлений на странице :</p>
+            <p>Количество объявлений:</p>
             <input type="number" min={1} max={100} onChange={handlePageSizeChange} defaultValue={pageSize}/>
         </div>
     );

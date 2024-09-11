@@ -1,10 +1,10 @@
 .card {
-    position: relative;
     flex: 1 0 300px;
     max-width: 470px;
     border: 2px solid black;
     border-radius: 8px;
-    width: 100%;
+    display: flex;
+    position: relative;
     padding: 16px;
 }
 

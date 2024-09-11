@@ -18,8 +18,8 @@ export const getOrders = async (
         filterParams.append('_order', sort.direction);
     }
 
-    if (status) filterParams.append('status', status.toString());
-    console.log(`orders?${filterParams.toString()}`);
+    if (status || status === 0) filterParams.append('status', status.toString());
+
     return sendRequest(`orders?${filterParams.toString()}`, 'GET', undefined, signal);
 };
 

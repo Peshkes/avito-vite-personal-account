@@ -46,6 +46,6 @@ export type SortType = {
 export type Sorting = Array<SortType>;
 
 export const SortingData: Sorting = [
-    {id: 1, name: 'Цена по возрастанию', field: 'total', direction: 'desc'},
-    {id: 2, name: 'Цена по убыванию', field: 'total', direction: 'asc'},
+    {id: 1, name: 'Цена по возрастанию', field: 'total', direction: 'asc'},
+    {id: 2, name: 'Цена по убыванию', field: 'total', direction: 'desc'},
 ] as const;

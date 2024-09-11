@@ -11,6 +11,7 @@
     border-radius: 10px;
     width: 50%;
     min-width: fit-content;
+    z-index: 30;
 }
 
 .blackBlock ul{

@@ -15,9 +15,7 @@ const Pagination = ({currentPage, pageSize, totalItems, changePage}: PaginationP
     }, [totalItems, changePage]);
 
     const handleNext = () => {
-        if (currentPage < Math.ceil(totalItems / pageSize)) {
-            changePage(currentPage + 1);
-        }
+        changePage(currentPage + 1);
     };
 
     const handlePrevious = () => {
@@ -30,7 +28,7 @@ const Pagination = ({currentPage, pageSize, totalItems, changePage}: PaginationP
         <div className={style.pagination}>
             <button onClick={handlePrevious} disabled={currentPage === 1}>←</button>
             <span>{currentPage}</span>
-            <button onClick={handleNext} disabled={currentPage >= Math.ceil(totalItems / pageSize)}>→</button>
+            <button onClick={handleNext} disabled={pageSize > totalItems}>→</button>
         </div>
     );
 };

@@ -1,6 +1,17 @@
 .gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 25px;
+}
+
+@media screen and (min-width: 560px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+}
+
+@media screen and (min-width: 810px) {
+    .gallery {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 }
