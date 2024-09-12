@@ -1,17 +1,18 @@
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { OrderStatus, OrderStatusValue } from '../../../features/orders/types.ts';
-import style from './OrderFilter.module.css';
-import Button from "../../../shared/ui/button/Button.tsx";
-import { setFilters } from '../../../features/orders/ordersSlice.ts';
-import { selectOrdersFilters } from "../../../features/orders/ordersSelectors.ts";
+import {useEffect, useMemo, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {OrderStatus, OrderStatusValue} from '../../../features/orders/types.ts';
+import {setFilters} from '../../../features/orders/ordersSlice.ts';
+import {selectOrdersFilters} from "../../../features/orders/ordersSelectors.ts";
 import DropdownButton from "../../../shared/components/dropdown-button/DropdownButton.tsx";
+import Button from "../../../shared/ui/button/Button.tsx";
+import style from './OrderFilter.module.css';
+import RadioButtonsList from "../../../shared/ui/radio-button-list/RadioButtonsList.tsx";
+
 
 const parseOrderFiltersFromSearchParams = (searchParams: URLSearchParams): OrderStatusValue | undefined => {
-    return searchParams.get('orderStatuses')
-        ? Number(searchParams.get('orderStatuses')) as OrderStatusValue
-        : undefined;
+    const status = searchParams.get('orderStatuses');
+    return status ? Number(status) as OrderStatusValue : undefined;
 };
 
 const OrderFilter = () => {
@@ -25,17 +26,19 @@ const OrderFilter = () => {
 
     useEffect(() => {
         const newFilters = parseOrderFiltersFromSearchParams(searchParams);
-        setFiltersState(newFilters);
+        if (newFilters !== filters) {
+            setFiltersState(newFilters);
+        }
 
         if (JSON.stringify(newFilters) !== JSON.stringify(reduxFilter)) {
             dispatch(setFilters(newFilters));
         }
     }, [location.search]);
 
-    const handleStatusChange = (status: OrderStatusValue) => {
-        setFiltersState(status);
+    const handleStatusChange = (item: OrderStatusValue) => {
+        setFiltersState(item);
         const searchParams = new URLSearchParams(location.search);
-        searchParams.set('orderStatuses', status.toString());
+        searchParams.set('orderStatuses', item.toString());
         navigate(`?${searchParams.toString()}`);
     };
 
@@ -46,39 +49,28 @@ const OrderFilter = () => {
         navigate(`?${searchParams.toString()}`);
     };
 
-    const activeFilter = filters || null;
+    const filterOptions = useMemo(() => Object.keys(OrderStatus).map(key => ({
+        id: OrderStatus[key as keyof typeof OrderStatus],
+        name: key
+    })), []);
 
     return (
         <DropdownButton
-            buttonText={activeFilter !== null ? `Фильтр (${Object.keys(OrderStatus).find(key => OrderStatus[key as keyof typeof OrderStatus] === activeFilter)})` : 'Фильтр'}
+            buttonText={filters !== undefined ? `Фильтр (${Object.keys(OrderStatus).find(key => OrderStatus[key as keyof typeof OrderStatus] === filters)})` : 'Фильтр'}
             dropdownContent={
                 <div className={style.filterDropdown}>
                     <h3>Статус заказа</h3>
-                    <div className={style.filterOptions}>
-                        {Object.keys(OrderStatus).map(key => {
-                            const status = OrderStatus[key as keyof typeof OrderStatus];
-                            return (
-                                <label key={status}>
-                                    <input
-                                        type="radio"
-                                        name="orderStatus"
-                                        checked={filters === status}
-                                        onChange={() => handleStatusChange(status)}
-                                    />
-                                    {key}
-                                </label>
-                            );
-                        })}
-                    </div>
-                    <Button
-                        withArrow={false}
-                        onClick={resetFilters}
-                    >
+                    <RadioButtonsList<OrderStatusValue>
+                        data={filterOptions}
+                        activeOption={filters === 0 || filters ? {id: filters, name: ''} : null}
+                        handleOptionChange={handleStatusChange}
+                    />
+                    <Button withArrow={false} onClick={resetFilters}>
                         Сбросить
                     </Button>
                 </div>
             }
-            active={activeFilter !== null}
+            active={filters !== undefined}
         />
     );
 };

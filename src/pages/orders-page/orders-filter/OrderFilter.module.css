@@ -1,37 +1,5 @@
-.filterGroup {
-    margin-bottom: 25px;
-}
-
-.filterGroup h3 {
-    font-size: 14px;
-    color: black;
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.filterGroup .inputs {
+.filterDropdown {
     display: flex;
-    justify-content: space-between;
-    gap: 25px;
-}
-
-.filterGroup input {
-    width: calc(50% - 12.5px);
-    padding: 5px;
-    border: 2px solid black;
-    border-radius: 4px;
-}
-
-.filterGroup:last-of-type {
-    margin-bottom: 0;
-}
-
-.filterOptions {
-    display: flex;
+    align-items: center;
     flex-direction: column;
-    gap: 10px;
-}
-
-.filterOptions input {
-    margin-right: 5px;
 }
