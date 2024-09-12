@@ -1,50 +1,60 @@
-# React + TypeScript + Vite
+### Личный кабинет на портале для объявлений (avito)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Приложение (фронтенд), построенное на основе мок API, данного по ТЗ, являющаяся интерфейсом с полной CRUD функциональностью для работы с объявлениями, а также возможностью просмотра заказов
 
-Currently, two official plugins are available:
+#### Запуск приложения
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Запуск из среды разработки (нужен node.js)
+1. Клонируете репозиторий командой `git clone <ссылка_на_проект>`
+2. Устанавливаете зависимости при помощи команды `npm i`
+3. Запустите mock dev сервер командой `npm server`, dev-server откроется автоматически на порту 8080 (стандартный порт для Spring Boot, для создания иллюзии очень серьезного сервера)
+4. Запустите вебсайт командой `npm start`
+5. Пользуйтесь)))
 
-## Expanding the ESLint configuration
+Докер
+1. Скачивание имеджа `docker pull peshkes/personal-account-avito-test-task:latest`
+2. Создание имеджа из локального проекта `docker build --no-cache -t personal-account-avito-test-task .`
+2. Запуск имеджа в контейнере `docker run -d -p 3000:3000 -p 8080:8080 --name peshkes-avito personal-account-avito-test-task`
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### Технологии
 
-- Configure the top-level `parserOptions` property like this:
+`VITE`, `React`, `TypeScript`, `ESLint`, `React Redux with a Toolkit`, `CSS Modules`, `JSON Server`.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### Описание функциональности
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+1. Навигация через шапку и подвал.
+2. Страница **Все объявления** имеет следующую функциональность:
+   1. Просмотр всех объявлений с пагинацией.
+   2. Фильтрация по ценам, лайкам и просмотрам.
+   3. Выбор количества объявлений на странице.
+   4. Поиск по названию.
+   5. Добавление нового объявления.
+   6. Переход к объявлению по нажатию на карточку.
+3. Страница **Объявления** имеет следующую функциональность:
+   1. Редактировать объявление.
+   2. Удалить объявление.
+   3. Переход на страницу **Заказы** по нажатию на кнопку "Заказы". При переходе будут показаны только те заказы, которые содержат это объявдение.
+4. Страница **Заказы** имеет следующую функциональность:
+   1. Просмотр всех заказов с пагинацией.
+   2. Фильтрация по статусу заказа.
+   3. Сортировка по цене.
+   4. Просмотр товаров заказа.
+   5. Переход к объявлению товара по нажатию на объявление.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+#### Прикольные фишки
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Анимация шарика, преследующего мышку.
+2. Блок уведомлений, реагирующий на каждый запрос и стакающий уведомления, если их много.
+
+#### Нюансы и возможные проблемы
+
+1. В приложении присутствует обработка ошибок и вывод ошибок через уведомления, но, возможно, не все ошибки были покрыты.
+2. Ограниченные возможности поиска и фильтрации из-за использования json server. Для реализации некоторых описанных в задании функций пришлось спуститься на более старую версию JSON Server.
+3. Много времени ушло на дизайн приложения. По заданию есть только подробное ТЗ (без дизайна).
+4. В целом на разработку было всего 5 дней (без учета личных дел), поэтому оптимизировать и доработать нюансы не получилось. Постарался сделать оптимально, вынося всё в отдельные компоненты для избегания дублирования и лишних рендеров.
+5. Приложение имеет мобильную версию и в целом неплохо масштабируется. Мобильная версия не доработана, хотелось бы настройки для галлереи вынести в бургер, но не хватило времени.
+6. Хотел разбить на 2 контейнера в одном проекте, чтобы сервер и клиент были в отдельных изолированных контейнерах, но по ТЗ нужно отправить докер имейдж, и, как я понял, нельзя собрать несколько контейнеров в один имейдж, так что будет этакое костыльное решение для удоства проверки. (Я не виноват, это всё для вашего удобства)
+
+#### Итоги
+
+Был разработан неплохой проект, как по мне. Узнал о новых для себя технологиях "Json Server" и "VITE". Понял, что в целом могу работать в сжатые сроки.

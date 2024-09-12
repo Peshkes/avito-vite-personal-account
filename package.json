@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "server": "json-server --watch mock/db.json --port 8080",
+    "server": "json-server --watch mock/db.json --port 8080 --host 0.0.0.0",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start:react": "vite preview --port 3000",
+    "start:both": "concurrently \"npm run start:react\" \"npm run server\""
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
@@ -32,6 +34,7 @@
     "json-server": "^0.17.4",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
-    "vite": "^5.4.1"
+    "vite": "^5.4.1",
+    "concurrently": "^7.6.0"
   }
 }
