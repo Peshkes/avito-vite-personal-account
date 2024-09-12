@@ -1,10 +1,9 @@
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-/* eslint-disable @typescript-eslint/no-explicit-any */ //Чтобы сделать универсальную функцию
-export const sendRequest = async (
+export const sendRequest = async <T> (
     endpoint: string,
     method: string = 'GET',
-    data?: any,
+    data?: T,
     signal?: AbortSignal) => {
     try {
         const response = await fetch(`${BASE_URL}/${endpoint}`, {
