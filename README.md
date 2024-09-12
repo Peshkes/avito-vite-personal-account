@@ -13,8 +13,8 @@
 
 Докер
 1. Скачивание имеджа `docker pull peshkes/personal-account-avito-test-task:latest`
-2. Создание имеджа из локального проекта `docker build --no-cache -t personal-account-avito-test-task .`
-2. Запуск имеджа в контейнере `docker run -d -p 3000:3000 -p 8080:8080 --name peshkes-avito personal-account-avito-test-task`
+2. Если не вышло загрузить, то можно создать имедж из локального проекта `docker build --no-cache -t personal-account-avito-test-task .`
+3. Запуск имеджа в контейнере `docker run -d -p 3000:3000 -p 8080:8080 --name peshkes-avito personal-account-avito-test-task`
 
 #### Технологии
 
@@ -58,3 +58,8 @@
 #### Итоги
 
 Был разработан неплохой проект, как по мне. Узнал о новых для себя технологиях "Json Server" и "VITE". Понял, что в целом могу работать в сжатые сроки.
+
+#### Ссылки
+
+DockerHub: https://hub.docker.com/repository/docker/peshkes/personal-account-avito-test-task/tags
+GitHub: https://github.com/Peshkes
